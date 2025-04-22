@@ -35,7 +35,6 @@ class Button:
         """Draw the button on the screen."""
         self.screen.fill(self.button_color, self.rect)
         self.screen.blit(self.msg_image, self.msg_image_rect)
-        print("Drawing button...")
 
     def check_clicked(self, mouse_pos) -> bool:
         """Check if the button was clicked."""

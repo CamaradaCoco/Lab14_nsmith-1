@@ -73,7 +73,7 @@ class AlienInvasion:
         for event in pg.event.get():
             if event.type == pg.QUIT:
                 sys.exit()
-            elif event.type == pg.KEYDOWN:
+            elif event.type == pg.KEYDOWN and self.game_active:
                 self._check_keydown_events(event)
             elif event.type == pg.KEYUP:
                 self._check_keyup_events(event)
