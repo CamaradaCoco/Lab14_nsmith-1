@@ -63,7 +63,7 @@ class AlienInvasion:
         self.play_button = Button(self, "Play", self.settings)
 
         # Start alien invasion in an active state.
-        self.game_active = True
+        self.game_active = False
 
     # ------------------------------
     # Event Handling Functions
