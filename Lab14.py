@@ -34,6 +34,7 @@ class AlienInvasion:
         pg.init()
         self.clock = pg.time.Clock()
         self.settings = Settings()
+        self.settings.initialize_dynamic_settings()
 
         # Set up screen, fullscreen.
         self.screen = pg.display.set_mode((0, 0), pg.FULLSCREEN)

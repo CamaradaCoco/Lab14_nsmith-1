@@ -27,30 +27,37 @@ class Settings:
         self.screen_height = 800
         self.bg_color = (220, 100, 100)
 
+        # Bullet settings
+        self.bullet_color = (60, 60, 60)
+
+        # Alien settings
+        self.fleet_drop_speed = 5
+        self.fleet_direction = 1
+
+        # Button settings
+        self.button_color = (0, 0, 0)
+        self.button_w = 200
+        self.button_h = 50
+        self.text_color = (255, 255, 255)
+        self.button_font_size = 48
+        self.HUD_font_size = 48
+        self.font_file = Path.cwd () / "fonts" / "UnifrakturMaguntia-Regular.ttf"
+
+    def initialize_dynamic_settings(self) -> None:
+        """Initialize settings that change throughout the game."""
+
         # Ship settings
         self.ship_speed = 4
         self.ship_limit = 3
 
         # Bullet settings
+        self.bullet_width = 25
+        self.bullet_height = 28
         self.bullet_speed = 20
-        self.bullet_width = 10
-        self.bullet_height = 15
-        self.bullet_color = (60, 60, 60)
         self.bullets_allowed = 3
 
-        # Alien settings
+        
         self.alien_speed = 5.0
-        self.fleet_drop_speed = 5
+
         # Fleet direction of 1 represents right; -1 represents left.
         self.fleet_direction = 1
-
-        # Button settings
-
-        self.button_w = 200
-        self.button_h = 50
-        self.button_color = (0, 0, 0)
-
-        self.text_color = (255, 255, 255)
-        self.button_font_size = 48
-        self.HUD_font_size = 48
-        self.font_file = Path.cwd () / "fonts" / "UnifrakturMaguntia-Regular.ttf"
