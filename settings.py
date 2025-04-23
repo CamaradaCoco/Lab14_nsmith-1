@@ -48,7 +48,7 @@ class Settings:
 
         # Ship settings
         self.ship_speed = 4
-        self.ship_limit = 3
+        self.ship_limit = 1
 
         # Bullet settings
         self.bullet_width = 25
@@ -56,11 +56,8 @@ class Settings:
         self.bullet_speed = 20
         self.bullets_allowed = 3
 
-        
-        self.alien_speed = 5.0
-
-        # Fleet direction of 1 represents right; -1 represents left.
-        self.fleet_direction = 1
+        # Alien settings
+        self.alien_speed = 10.0
 
     def increase_difficulty(self) -> None:
         """Increase speed settings."""

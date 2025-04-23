@@ -124,7 +124,10 @@ class AlienInvasion:
         if not self.aliens:
             # Destroy existing bullets and create a new fleet.
             self.bullets.empty()
-            self._create_fleet()
+            self._reset_level()
+            self.settings.increase_difficulty()
+            # Update states stats model
+            # Update HUD
 
     def _update_aliens(self) -> None:
         """Check if the fleet is at an edge, then update the positions."""
@@ -186,6 +189,15 @@ class AlienInvasion:
     # ------------------------------
     # Game Reset Functions
     # ------------------------------
+    def _check_game_status(self) -> None:
+        """Check if the game is over and reset if necessary."""
+        if self.stats.ships_left >= 0:
+            self.stats.ships_left -= 1
+            self._reset_level
+            sleep(0.5)
+        else:
+            self.game_active = False
+    
     def restart_game(self) -> None:
         """Restart the game by resetting stats, level, and recentering the ship."""
         self.stats.reset_stats()
@@ -222,6 +234,8 @@ class AlienInvasion:
         if not self.game_active:
             self.play_button.draw()
             pg.mouse.set_visible(True)
+
+        # Draw HUD
 
         pg.display.flip()
 
