@@ -54,10 +54,10 @@ class Settings:
         self.bullet_width = 25
         self.bullet_height = 28
         self.bullet_speed = 20
-        self.bullets_allowed = 3
+        self.bullets_allowed = 5
 
         # Alien settings
-        self.alien_speed = 10.0
+        self.alien_speed = 2.0
 
     def increase_difficulty(self) -> None:
         """Increase speed settings."""
