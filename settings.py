@@ -61,3 +61,16 @@ class Settings:
 
         # Fleet direction of 1 represents right; -1 represents left.
         self.fleet_direction = 1
+
+    def increase_difficulty(self) -> None:
+        """Increase speed settings."""
+        self.ship_speed *= 1.1
+        self.bullet_speed *= 1.1
+        self.alien_speed *= 1.1
+
+        # Increase the fleet's drop speed.
+        self.fleet_drop_speed *= 1.1
+
+        # Increase the number of bullets allowed.
+        if self.bullets_allowed < 10:
+            self.bullets_allowed += 1
