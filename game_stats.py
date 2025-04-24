@@ -12,6 +12,10 @@ Usage:
     The GameStats class is instantiated at the start of the game and is used to track
     statistics that can change during gameplay, such as the number of ships left.
 """
+
+from pathlib import Path
+import json
+
 from typing import TYPE_CHECKING
 if TYPE_CHECKING:
     from Lab14 import AlienInvasion
@@ -25,7 +29,7 @@ class GameStats:
 
         self.game = AlienInvasion
         self.settings = AlienInvasion.settings
-        self.max_score = 0
+        self.high_score = 0
         self.level = 1
         self.init_saved_scores()
         self.reset_stats()
@@ -33,13 +37,26 @@ class GameStats:
     def init_saved_scores(self) -> None:
         """Initialize saved scores."""
 
+        self.path = self.settings.score_file
+        if self.path.exists():
+            contents = self.path.read_text()
+            scores = json.loads(contents)
+            self.high_score = scores.get("high_score", 0)
+        else:
+            self.high_score = 0
+            self.save_scores()
+
+    def save_scores(self) -> None:
+        """Save scores to a file."""
+
+        scores = {"high_score": self.high_score}
+        
+        contents = json.dumps(scores, indent=4)
+
         try:
-            with open("high_score.txt", "r") as file:
-                self.max_score = int(file.read())
-        except FileNotFoundError:
-            self.max_score = 0
-        except ValueError:
-            self.max_score = 0
+            self.path.write_text(contents)
+        except:
+            FileNotFoundError(f"File {self.path} not found.")
 
     def reset_stats(self) -> None:
         """Initialize statistics that can change during the game."""
@@ -54,12 +71,13 @@ class GameStats:
         self._update_score(collisions)
 
         # Update max score
-        self._update_max_score()
+        self._update_high_score()
 
-    def _update_max_score(self):
-        """Update max score if the current score is higher."""
-        if self.score > self.max_score:
-            self.max_score = self.score
+    def _update_high_score(self):
+        """Update high score if the current score is higher."""
+        if self.score > self.high_score:
+            self.high_score = self.score
+            self.save_scores()
 
     def _update_score(self, collisions):
         """Update the score based on collisions."""
