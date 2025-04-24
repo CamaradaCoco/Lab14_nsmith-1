@@ -45,8 +45,11 @@ class AlienInvasion:
         pg.display.set_caption("Alien Invasion")
 
         # Load laser sound
-        self.laser_sound = pg.mixer.Sound(Path.cwd() / "sound" / "laser.mp3")
+        self.laser_sound = pg.mixer.Sound(str(Path.cwd() / "sound" / "laser.mp3"))
         self.laser_sound.set_volume(0.05)
+
+        # Load impact sound
+        self.impact_sound = pg.mixer.Sound(str(Path.cwd() / "sound" / "impactSound.mp3"))
 
         # Create an instance to store game statistics.
         self.stats = GameStats(self)
@@ -120,6 +123,11 @@ class AlienInvasion:
     def _check_bullet_alien_collisions(self) -> None:
         """Respond to bullet-alien collisions."""
         collisions = pg.sprite.groupcollide(self.bullets, self.aliens, True, True)
+
+        if collisions:
+            self.impact_sound.play()
+            self.impact_sound.set_volume(30)
+            self.impact_sound.fadeout(500)
 
         if not self.aliens:
             # Destroy existing bullets and create a new fleet.

@@ -29,10 +29,12 @@ class Settings:
 
         # Bullet settings
         self.bullet_color = (60, 60, 60)
+        self.laser_sound = Path.cwd () / "sounds" / "laser.wav"
 
         # Alien settings
         self.fleet_drop_speed = 5
         self.fleet_direction = 1
+        self.impact_sound = Path.cwd () / "sounds" / "impact.wav"
 
         # Button settings
         self.button_color = (0, 0, 0)
@@ -58,6 +60,7 @@ class Settings:
 
         # Alien settings
         self.alien_speed = 2.0
+        self.alien_points = 50
 
     def increase_difficulty(self) -> None:
         """Increase speed settings."""
