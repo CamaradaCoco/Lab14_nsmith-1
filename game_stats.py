@@ -26,14 +26,26 @@ class GameStats:
         self.game = AlienInvasion
         self.settings = AlienInvasion.settings
         self.max_score = 0
+        self.level = 1
+        self.init_saved_scores()
         self.reset_stats()
+
+    def init_saved_scores(self) -> None:
+        """Initialize saved scores."""
+
+        try:
+            with open("high_score.txt", "r") as file:
+                self.max_score = int(file.read())
+        except FileNotFoundError:
+            self.max_score = 0
+        except ValueError:
+            self.max_score = 0
 
     def reset_stats(self) -> None:
         """Initialize statistics that can change during the game."""
 
         self.ships_left = self.settings.ship_limit
         self.score = 0
-        self.level = 1
 
     def update_stats(self, collisions) -> None:
         """Update the statistics."""
@@ -54,6 +66,8 @@ class GameStats:
 
         for alien in collisions.values():
             self.score += self.settings.alien_points
+
+        print(f"Score: {self.score}")
 
     def update_level(self) -> None:
         """Update the level."""

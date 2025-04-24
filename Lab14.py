@@ -45,11 +45,11 @@ class AlienInvasion:
         pg.display.set_caption("Alien Invasion")
 
         # Load laser sound
-        self.laser_sound = pg.mixer.Sound(str(Path.cwd() / "sound" / "laser.mp3"))
+        self.laser_sound = pg.mixer.Sound(str(Path.cwd() / "Assets" / "sound" / "laser.mp3"))
         self.laser_sound.set_volume(0.05)
 
         # Load impact sound
-        self.impact_sound = pg.mixer.Sound(str(Path.cwd() / "sound" / "impactSound.mp3"))
+        self.impact_sound = pg.mixer.Sound(str(Path.cwd() / "Assets" / "sound" / "impactSound.mp3"))
 
         # Create an instance to store game statistics.
         self.game_stats = GameStats(self)
@@ -218,7 +218,7 @@ class AlienInvasion:
         """Restart the game by resetting stats, level, and recentering the ship."""
         self.settings.initialize_dynamic_settings()
         self.game_stats.reset_stats()
-        self._reset_level
+        self._reset_level()
         self.game_active = True
         pg.mouse.set_visible(False)
 
