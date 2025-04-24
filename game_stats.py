@@ -59,4 +59,5 @@ class GameStats:
         """Update the level."""
 
         self.level += 1
-        self.settings.increase_speed(0.5)
+        self.settings.increase_difficulty()
+        print(f"Level {self.level} reached!")

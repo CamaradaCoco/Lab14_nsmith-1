@@ -52,7 +52,7 @@ class AlienInvasion:
         self.impact_sound = pg.mixer.Sound(str(Path.cwd() / "sound" / "impactSound.mp3"))
 
         # Create an instance to store game statistics.
-        self.stats = GameStats(self)
+        self.game_stats = GameStats(self)
 
         # Create instance of Ship class.
         self.ship = Ship(self)
@@ -124,16 +124,19 @@ class AlienInvasion:
         """Respond to bullet-alien collisions."""
         collisions = pg.sprite.groupcollide(self.bullets, self.aliens, True, True)
 
+        # If bullet collides with alien, play impact sound.
         if collisions:
             self.impact_sound.play()
             self.impact_sound.set_volume(30)
             self.impact_sound.fadeout(500)
+            self.game_stats.update_stats(collisions)
 
         if not self.aliens:
             # Destroy existing bullets and create a new fleet.
             self.bullets.empty()
             self._reset_level()
             self.settings.increase_difficulty()
+            self.game_stats.update_level()
             # Update states stats model
             # Update HUD
 
@@ -178,8 +181,13 @@ class AlienInvasion:
 
     def _ship_hit(self) -> None:
         """Respond to the ship being hit by an alien."""
-        if self.stats.ships_left > 0:
-            self.stats.ships_left -= 1
+
+        self.impact_sound.play()
+        self.impact_sound.set_volume(30)
+        self.impact_sound.fadeout(500)
+
+        if self.game_stats.ships_left > 0:
+            self.game_stats.ships_left -= 1
             self.aliens.empty()
             self.bullets.empty()
             self._create_fleet()
@@ -199,8 +207,8 @@ class AlienInvasion:
     # ------------------------------
     def _check_game_status(self) -> None:
         """Check if the game is over and reset if necessary."""
-        if self.stats.ships_left >= 0:
-            self.stats.ships_left -= 1
+        if self.game_stats.ships_left >= 0:
+            self.game_stats.ships_left -= 1
             self._reset_level
             sleep(0.5)
         else:
@@ -208,17 +216,15 @@ class AlienInvasion:
     
     def restart_game(self) -> None:
         """Restart the game by resetting stats, level, and recentering the ship."""
-        self.stats.reset_stats()
-        self.aliens.empty()
-        self.bullets.empty()
-        self._create_fleet()
-        self.ship.center_ship()
+        self.settings.initialize_dynamic_settings()
+        self.game_stats.reset_stats()
+        self._reset_level
         self.game_active = True
         pg.mouse.set_visible(False)
 
     def _reset_level(self) -> None:
         """Reset the level to its initial state."""
-        self.stats.reset_stats()
+        self.game_stats.reset_stats()
         self.aliens.empty()
         self.bullets.empty()
         self._create_fleet()
