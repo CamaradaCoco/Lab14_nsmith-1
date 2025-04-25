@@ -40,9 +40,16 @@ class Settings:
         self.button_h = 50
         self.text_color = (255, 255, 255)
         self.button_font_size = 48
-        self.HUD_font_size = 48
         self.font_file = Path.cwd () / "Assets" / "fonts" / "UnifrakturMaguntia-Regular.ttf"
+
+        # HUD settings
         self.score_file = Path.cwd () / "Assets" / "file" / "scores.json"
+        self.hud_color = (0, 0, 0)
+        self.hud_w = 200
+        self.hud_h = 50
+        self.hud_font_size = 48
+        self.hud_font_color = (255, 255, 255)
+        self.hud_font_file = Path.cwd () / "Assets" / "fonts" / "UnifrakturMaguntia-Regular.ttf"
 
     def initialize_dynamic_settings(self) -> None:
         """Initialize settings that change throughout the game."""
