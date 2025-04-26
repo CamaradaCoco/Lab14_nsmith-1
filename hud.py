@@ -76,7 +76,6 @@ class HUD:
     def setup_life_image(self) -> None:
         """Set up the life image."""
 
-        
         self.life_image = pg.transform.rotate(self.ship.image, -90).convert_alpha()
         #self.life_image = pg.transform.scale(self.life_image, (self.settings.ship_w, self.settings.ship_h))
         self.life_rect = self.life_image.get_rect()
