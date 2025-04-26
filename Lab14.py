@@ -53,6 +53,9 @@ class AlienInvasion:
         # Load impact sound
         self.impact_sound = pg.mixer.Sound(str(Path.cwd() / "Assets" / "sound" / "impactSound.mp3"))
 
+        # Create an instance of the Ship class.
+        self.ship = Ship(self)
+        
         # Create an instance to store game statistics.
         self.game_stats = GameStats(self)
 

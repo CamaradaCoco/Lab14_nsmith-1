@@ -39,7 +39,7 @@ class Ship:
         self.rect.midright = self.screen_rect.midright
 
         # Store a floating value for the ship's exact horizontal position.
-        self. y= float(self.rect.y)
+        self.y = float(self.rect.y)
 
         # Movement flags
         self.moving_up = False

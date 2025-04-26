@@ -30,6 +30,7 @@ class HUD:
 
         self.game = game
         self.settings = game.settings
+        self.ship = game.ship
         self.screen = game.screen
         self.boundaries = self.screen.get_rect()
         self.stats = game.game_stats
@@ -71,6 +72,14 @@ class HUD:
         self.high_score_image = self.font.render(high_score_str, True, self.settings.hud_font_color, None)
         self.high_score_rect = self.high_score_image.get_rect()
         self.high_score_rect.midtop = (self.boundaries.centerx, self.padding)
+        
+    def setup_life_image(self) -> None:
+        """Set up the life image."""
+
+        
+        self.life_image = pg.transform.rotate(self.ship.image, -90).convert_alpha()
+        #self.life_image = pg.transform.scale(self.life_image, (self.settings.ship_w, self.settings.ship_h))
+        self.life_rect = self.life_image.get_rect()
 
     def draw(self) -> None:
         """Draw the HUD."""
@@ -78,11 +87,17 @@ class HUD:
         self.screen.blit(self.high_score_image, self.high_score_rect)
         self.screen.blit(self.max_score_image, self.max_score_rect)
         self.screen.blit(self.score_image, self.score_rect)
-        
-    def setup_life_image(self) -> None:
-        """Set up the life image."""
+        self._draw_lives()
 
-        #self.setup_life_image()
+    def _draw_lives(self) -> None:
+        """Draw the lives to the screen."""
+    
+        current_x = self.padding
+        current_y = self.padding
+
+        for _ in range(self.stats.ships_left):
+            self.screen.blit(self.life_image, (current_x, current_y))
+            current_x += self.life_rect.width - 5
 
     def update_level(self):
         """Update the level."""
