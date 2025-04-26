@@ -25,6 +25,7 @@ from ship import Ship
 from bullet import Bullet
 from alien import Alien
 from button import Button
+from hud import HUD
 
 
 class AlienInvasion:
@@ -54,6 +55,9 @@ class AlienInvasion:
 
         # Create an instance to store game statistics.
         self.game_stats = GameStats(self)
+
+        # Create an instance of the HUD class.
+        self.HUD = HUD(self)
 
         # Create instance of Ship class.
         self.ship = Ship(self)
@@ -131,6 +135,7 @@ class AlienInvasion:
             self.impact_sound.set_volume(30)
             self.impact_sound.fadeout(500)
             self.game_stats.update_stats(collisions)
+            self.HUD.update_scores()
 
         if not self.aliens:
             # Destroy existing bullets and create a new fleet.
@@ -138,8 +143,7 @@ class AlienInvasion:
             self._reset_level()
             self.settings.increase_difficulty()
             self.game_stats.update_level()
-            # Update states stats model
-            # Update HUD
+            self.HUD.update_scores()
 
     def _update_aliens(self) -> None:
         """Check if the fleet is at an edge, then update the positions."""
@@ -219,6 +223,7 @@ class AlienInvasion:
         """Restart the game by resetting stats, level, and recentering the ship."""
         self.settings.initialize_dynamic_settings()
         self.game_stats.reset_stats()
+        self.HUD.update_scores()
         self._reset_level()
         self.game_active = True
         pg.mouse.set_visible(False)
@@ -238,20 +243,25 @@ class AlienInvasion:
         """Update images on the screen, and flip to the new screen."""
         self.screen.fill(self.settings.bg_color)
 
+        # Draw the bullets
         for bullet in self.bullets.sprites():
             pg.draw.rect(self.screen, self.settings.bullet_color, bullet.rect)
 
+        # Draw the ship at its current location.
         self.screen.blit(self.ship.image, self.ship.rect)
 
+        # Draw the aliens.
         for alien in self.aliens.sprites():
             self.screen.blit(alien.image, alien.rect)
+
+        # Draw the HUD
+        self.HUD.draw()
 
         if not self.game_active:
             self.play_button.draw()
             pg.mouse.set_visible(True)
 
-        # Draw HUD
-
+        # Make the most recently drawn screen visible.
         pg.display.flip()
 
     # ------------------------------

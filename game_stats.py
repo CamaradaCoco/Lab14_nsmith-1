@@ -33,6 +33,7 @@ class GameStats:
         self.game = AlienInvasion
         self.settings = AlienInvasion.settings
         self.high_score = 0
+        self.max_score = 0
         self.level = 1
         self.init_saved_scores()
         self.reset_stats()
@@ -73,8 +74,16 @@ class GameStats:
         # Update score
         self._update_score(collisions)
 
-        # Update max score
+        self._update_max_score()
+
+        # Update high score
         self._update_high_score()
+
+    def _update_max_score(self):
+        """Update max score if the current score is higher."""
+
+        if self.score > self.max_score:
+            self.max_score = self.score
 
     def _update_high_score(self):
         """Update high score if the current score is higher."""
