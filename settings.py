@@ -1,3 +1,6 @@
+# Lab 14 #1 (Side Alien Invasion Option) / Alien Invasion Game
+# Nicholas Smith / 25 April 2025
+
 """
 settings.py
 
@@ -11,7 +14,6 @@ Classes:
 Usage:
     The Settings class is instantiated at the start of the game and provides access
     to all static and dynamic settings throughout the game.
-
 """
 
 from pathlib import Path

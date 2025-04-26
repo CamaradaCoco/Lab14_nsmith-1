@@ -1,3 +1,6 @@
+# Lab 14 #1 (Side Alien Invasion Option) / Alien Invasion Game
+# Nicholas Smith / 25 April 2025
+
 """
 button.py
 
@@ -15,13 +18,6 @@ Dependencies:
 Usage:
     The Button class is initialized with an instance of the game, a message to display on the button,
     and a settings object. It provides methods to render the button and check for mouse clicks.
-
-Example:
-    from button import Button
-    play_button = Button(game, "Play", settings)
-    play_button.draw()
-    if play_button.check_clicked(mouse_pos):
-        print("Button clicked!")
 """
 
 import pygame as pg

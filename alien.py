@@ -1,3 +1,25 @@
+# Lab 14 #1 (Side Alien Invasion Option) / Alien Invasion Game
+# Nicholas Smith / 25 April 2025
+
+"""
+alien.py
+
+This module defines the Alien class, which represents a single alien in the fleet for the Alien Invasion game.
+The Alien class handles the alien's initialization, movement, and edge detection.
+
+Classes:
+    Alien: A class to represent a single alien in the fleet.
+
+Dependencies:
+    - pygame: Used for rendering the alien and managing its sprite behavior.
+    - pygame.sprite.Sprite: The base class for all game objects in the game.
+    - pathlib.Path: Used for handling file paths to load the alien image.
+
+Usage:
+    The Alien class is initialized with an instance of the game. It provides methods to update the alien's position
+    and check if the alien has reached the edge of the screen.
+"""
+
 import pygame as pg
 from pygame.sprite import Sprite
 from pathlib import Path
