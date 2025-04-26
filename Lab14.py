@@ -55,7 +55,7 @@ class AlienInvasion:
 
         # Create an instance of the Ship class.
         self.ship = Ship(self)
-        
+
         # Create an instance to store game statistics.
         self.game_stats = GameStats(self)
 
@@ -147,6 +147,7 @@ class AlienInvasion:
             self.settings.increase_difficulty()
             self.game_stats.update_level()
             self.HUD.update_scores()
+            self.HUD.update_level()
 
     def _update_aliens(self) -> None:
         """Check if the fleet is at an edge, then update the positions."""
