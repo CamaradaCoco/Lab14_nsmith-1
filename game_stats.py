@@ -85,11 +85,8 @@ class GameStats:
         for alien in collisions.values():
             self.score += self.settings.alien_points
 
-        print(f"Score: {self.score}")
-
     def update_level(self) -> None:
         """Update the level."""
 
         self.level += 1
         self.settings.increase_difficulty()
-        print(f"Level {self.level} reached!")

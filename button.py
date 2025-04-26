@@ -1,6 +1,30 @@
+"""
+button.py
+
+This module defines the Button class, which is responsible for creating and managing
+interactive buttons in the game. Buttons are used for actions such as starting the game
+or interacting with the user interface.
+
+Classes:
+    Button: A class to create and render buttons, handle button clicks, and manage button properties.
+
+Dependencies:
+    - pygame: Used for rendering the button and handling user input.
+    - settings: Provides configuration for button dimensions, colors, and fonts.
+
+Usage:
+    The Button class is initialized with an instance of the game, a message to display on the button,
+    and a settings object. It provides methods to render the button and check for mouse clicks.
+
+Example:
+    from button import Button
+    play_button = Button(game, "Play", settings)
+    play_button.draw()
+    if play_button.check_clicked(mouse_pos):
+        print("Button clicked!")
+"""
 
 import pygame as pg
-import pygame.font
 from settings import Settings
 
 class Button:
@@ -41,5 +65,5 @@ class Button:
 
     def check_clicked(self, mouse_pos) -> bool:
         """Check if the button was clicked."""
-        
+
         return self.rect.collidepoint(mouse_pos)

@@ -1,3 +1,23 @@
+"""
+hud.py
+
+This module defines the HUD class, which is responsible for displaying
+game-related information such as the player's score, high score, remaining lives, and current level.
+
+Classes:
+    HUD: A class to manage and render the game's heads-up display.
+
+Dependencies:
+    - pygame: Used for rendering text and images on the screen.
+    - typing.TYPE_CHECKING: Used for type hinting to avoid circular imports.
+    - AlienInvasion: The main game class, passed to HUD for accessing game-related data.
+
+Usage:
+    The HUD class is initialized with an instance of the AlienInvasion game. It provides methods
+    to update and render various HUD elements, such as scores, high scores, lives, and levels.
+
+"""
+
 import pygame as pg
 from typing import TYPE_CHECKING
 
